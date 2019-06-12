@@ -1,0 +1,24 @@
+{
+  "name": "quotes_api",
+  "version": "1.0.0",
+  "description": "This project is based on creating an API used to access \"Quotes\".  Various quotes grouped by their Authors and Categories, are compiled and made available for use. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "quotes",
+    "api",
+    "knowledge",
+    "data",
+    "information"
+  ],
+  "author": "Adegoke Oluwadamilare",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
