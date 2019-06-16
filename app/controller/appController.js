@@ -27,3 +27,13 @@ exports.listByCategory = (req, res) => {
         };
     });
 };
+
+exports.listByAuthor = (req, res) => {
+  Quotes.readByAuthor(req.params.limit, (err, data) => {
+    if(err){
+      res.status(404).json({'Message': 'Invalid data'});
+    } else {
+      res.status(200).json({"Quotes": data});
+    }
+  })
+}

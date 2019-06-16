@@ -41,6 +41,22 @@ Quotes.readByCategory = function readByCategory(limit, results) {
             'Message': 'No limit given, Use -1 to request for all'
         }, null);
     }
-}
+};
+
+Quotes.readByAuthor = function readByAuthor(limit, results) {
+  if(limit) {
+    sql.query("SELECT  a.name  as authors_name,  q.quote ,  q.tags FROM " + tableName + " q LEFT JOIN  authors  a ON  q.category_id  =  a.id LIMIT 0," + limit", (err, data) => {
+      if(err) { results(err, null) }
+      else { results(null, err) }
+    });
+  } else if (limit == -1) {
+    sql.query("SELECT  a.name  as authors_name,  q.quote ,  q.tags FROM " + tableName + " q LEFT JOIN  authors  a ON  q.category_id  =  a.id", (err, data) => {
+      if(err){ results(err, null) }
+      else { results(null, data) }
+    });
+  } else {
+     results({'Message': 'No limit given, Use -1 to request for all'}, null);
+  }
+};
 
 module.exports = Quotes;
