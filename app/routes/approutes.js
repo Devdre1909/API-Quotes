@@ -9,6 +9,12 @@ module.exports = function (app) {
     app.route('/api/quotes/category/:limit')
         .get(todoQuotes.listByCategory);
 
+    app.route('/api/quotes/category/')
+        .get(todoQuotes.listByCategory);
+
     app.route('/api/quotes/authors/:limit')
+        .get(todoQuotes.listByAuthor);
+
+    app.route('/api/quotes/authors/')
         .get(todoQuotes.listByAuthor);
 };

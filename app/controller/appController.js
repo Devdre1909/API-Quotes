@@ -18,7 +18,7 @@ exports.listByCategory = (req, res) => {
     Quotes.readByCategory(req.params.limit, (err, data) => {
         if (err) {
             res.status(404).json({
-                'Message': 'An error occured!'
+                'Message': err
             });
         } else {
             res.status(200).json({
@@ -31,9 +31,9 @@ exports.listByCategory = (req, res) => {
 exports.listByAuthor = (req, res) => {
   Quotes.readByAuthor(req.params.limit, (err, data) => {
     if(err){
-      res.status(404).json({'Message': 'Invalid data'});
+      res.status(404).json({'Message': err});
     } else {
       res.status(200).json({"Quotes": data});
     }
   })
-}
+};
