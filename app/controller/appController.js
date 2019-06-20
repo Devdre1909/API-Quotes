@@ -4,7 +4,7 @@ exports.listAllQuotes = (req, res) => {
     Quotes.getAllQuotes((err, data) => {
         if (err) {
             res.status(404).json({
-                'Message': 'An error occured!'
+                'Message': err
             });
         } else {
             res.status(200).json({

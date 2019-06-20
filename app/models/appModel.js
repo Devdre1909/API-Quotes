@@ -10,7 +10,7 @@ const Quotes = function (info) {
 };
 
 Quotes.getAllQuotes = function getAllQuotes(results) {
-    sql.query("SELECT * FROM " + tableName, (err, data) => {
+    sql.query("SELECT a.name AS Author , c.name AS category, q.quote AS Quote, q.tags AS Tags FROM " + tableName + " q , authors a, categories c WHERE q.author_id = a.id AND q.category_id = c.id ORDER BY RAND()", (err, data) => {
         if (err) {
             results(err, null);
         } else {
@@ -22,7 +22,7 @@ Quotes.getAllQuotes = function getAllQuotes(results) {
 Quotes.readByCategory = function readByCategory(limit, results) {
   let a = 1;
     if (limit > 0) {
-        sql.query("SELECT  c.name  as quote_category,  q.quote ,  q.tags FROM " + tableName + " q LEFT JOIN  categories  c ON  q.category_id  =  c.id LIMIT 0," + limit, (err, data) => {
+        sql.query("SELECT  c.name  as Category,  q.quote AS Quote ,  q.tags AS Tags FROM " + tableName + " q, categories c WHERE q.category_id  =  c.id ORDER BY RAND() LIMIT 0," + limit, (err, data) => {
             if (err) {
                 results(err, null);
             } else {
@@ -30,7 +30,7 @@ Quotes.readByCategory = function readByCategory(limit, results) {
             }
         });
     } else {
-        sql.query("SELECT  c.name  as quote_category,  q.quote ,  q.tags FROM " + tableName + " q LEFT JOIN  categories  c ON  q.category_id  =  c.id", (err, data) => {
+        sql.query("SELECT  c.name  as Category, q.quote AS Quote ,  q.tags AS Tags " + tableName + " q, categories c WHERE q.category_id  =  c.id ORDER BY RAND()", (err, data) => {
             if (err) {
                 results(err, null);
             } else {
@@ -42,16 +42,18 @@ Quotes.readByCategory = function readByCategory(limit, results) {
 
 Quotes.readByAuthor = function readByAuthor(limit, results) {
   if(limit > 0) {
-    sql.query("SELECT a.name as author_name,  q.quote ,  q.tags FROM " + tableName + " q LEFT JOIN  authors  a ON  q.author_id  =  a.id LIMIT 0," + limit, (err, data) => {
+    sql.query("SELECT a.name AS Author,  q.quote AS Quote ,  q.tags AS Tags FROM " + tableName + " q, authors a WHERE q.author_id  =  a.id ORDER BY RAND() LIMIT 0," + limit, (err, data) => {
       if(err) { results(err, null) }
       else { results(null, data) }
     });
   } else {
-    sql.query("SELECT  a.name  as authors_name,  q.quote ,  q.tags FROM " + tableName + " q LEFT JOIN  authors  a ON  q.category_id  =  a.id", (err, data) => {
+    sql.query("SELECT a.name as Author,  q.quote AS Quotes ,  q.tags AS Tags FROM " + tableName + " q, authors a WHERE q.author_id  =  a.id ORDER BY RAND()", (err, data) => {
       if(err){ results(err, null) }
       else { results(null, data) }
     });
   }
 };
+
+Quotes.readBySettings = function readBySettings(){};
 
 module.exports = Quotes;

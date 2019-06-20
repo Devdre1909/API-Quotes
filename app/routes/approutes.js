@@ -17,4 +17,7 @@ module.exports = function (app) {
 
     app.route('/api/quotes/authors/')
         .get(todoQuotes.listByAuthor);
+
+    //app.route('/api/quotes/settings')
+      //  .post(todoQuotes.listBySettings);
 };
